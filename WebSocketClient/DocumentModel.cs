@@ -2,7 +2,7 @@
 {
 	public class TabletDocumentModel
 	{
-		public string EncryptedApplicationId { get; set; }
+		public int ApplicationId { get; set; }
 		public List<DocumentModel> DigitalSignatureDocuments { get; set; }
 	}
 
@@ -10,5 +10,7 @@
 	{
 		public byte DigitalSignatureDocumentId { get; set; }
 		public byte DocumentLanguageId { get; set; }
+
+		public byte? Signature { get; set;}
 	}
 }
