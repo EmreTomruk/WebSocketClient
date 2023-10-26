@@ -11,6 +11,6 @@
 		public byte DigitalSignatureDocumentId { get; set; }
 		public byte DocumentLanguageId { get; set; }
 
-		public byte? Signature { get; set;}
+		public byte[]? Signature { get; set;}
 	}
 }

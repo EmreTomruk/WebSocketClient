@@ -1,4 +1,6 @@
-﻿namespace WebSocketClient
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace WebSocketClient
 {
 	public class ApiResponse<T>
 	{
@@ -21,6 +23,6 @@
 		public int BranchId { get; set; }
 
         public string Html { get; set; }
-        //public byte[] Html { get; set; }
+        public FileContentResult File { get; set; }
     }
 }

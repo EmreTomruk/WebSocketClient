@@ -2,7 +2,7 @@
 using WebSocketClient;
 
 var connection = new HubConnectionBuilder()
-    .WithUrl("http://localhost:5000/digitalsignaturehub")
+    .WithUrl("https://localhost:7071/digitalsignaturehub")
     .WithAutomaticReconnect()
     .Build();
 
@@ -17,11 +17,9 @@ Console.ReadLine();
 
 void OpenConnection()
 {
-    var xx = Directory.GetCurrentDirectory();
-
     connection.On<string>("SetConnection", connectionId =>
     {
-        connection.InvokeAsync("SaveClient", connectionId, "test");
+        connection.InvokeAsync("SaveClient", connectionId, "Test");
         Console.WriteLine($"Connected: {DateTime.Now}");
     });
 
@@ -35,7 +33,7 @@ void OpenConnection()
 
 		var apiResponse = await HttpClientHelper
 			  .GetAsync<ApiResponse<ApplicationEntryFormApiResponse>>
-			  ("/api/Appointment/GetApplicationEntryForm/" + documents.ApplicationId + "/" + documentRequest.DocumentLanguageId, "http://localhost:5000", apiRequestHeader)
+			  ("/api/DigitalSignature/GetApplicationEntryForm/" + documents.ApplicationId + "/" + documentRequest.DocumentLanguageId, "https://localhost:7071", apiRequestHeader)
 			  .ConfigureAwait(false);
 
 		Console.WriteLine($"Connected: {DateTime.Now}");
