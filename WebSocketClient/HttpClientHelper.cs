@@ -32,15 +32,14 @@ namespace WebSocketClient
 					{
 						if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(headers[key]))
 						{
-							if (key == "Authorization") // TODO: kutay - clickatell servisi için eklendi
+							if (key == "Authorization") 
 							{
 								_client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", headers[key]);
 							}
-							// TODO: kutay - in case turkcell sms service activated
-							//else if (key == "Bearer") 
-							//{
-							//    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", headers[key]);
-							//}
+							else if (key == "Bearer")
+							{
+								_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", headers[key]);
+							}
 							else
 							{
 								request.Headers.Add(key, headers[key]);

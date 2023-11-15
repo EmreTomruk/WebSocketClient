@@ -19,7 +19,8 @@ void OpenConnection()
 {
     connection.On<string>("SetConnection", connectionId =>
     {
-        connection.InvokeAsync("SaveClient", connectionId, "Test");
+        connection.InvokeAsync("SaveClient", connectionId, "hostname");
+
         Console.WriteLine($"Connected: {DateTime.Now}");
     });
 
@@ -29,11 +30,11 @@ void OpenConnection()
 
         if (documentRequest == null) return;
 
-        var apiRequestHeader = SetPortalGatewayApi(documentRequest.DocumentLanguageId.ToString());
+        var apiRequestHeader = SetRequestHeader(documentRequest.DocumentLanguageId.ToString());
 
 		var apiResponse = await HttpClientHelper
 			  .GetAsync<ApiResponse<ApplicationEntryFormApiResponse>>
-			  ("/api/DigitalSignature/GetApplicationEntryForm/" + documents.ApplicationId + "/" + documentRequest.DocumentLanguageId, "https://localhost:7071", apiRequestHeader)
+			  ("/api/DigitalSignature/ExplicitConsentText/" + documents.ApplicationId + "/" + documentRequest.DocumentLanguageId, "https://localhost:7071", apiRequestHeader)
 			  .ConfigureAwait(false);
 
 		Console.WriteLine($"Connected: {DateTime.Now}");
@@ -54,13 +55,11 @@ void ReConnecting()
     Console.WriteLine($"Reconnecting: {DateTime.Now}");
 }
 
-Dictionary<string, string>? SetPortalGatewayApi(string languageId)
+Dictionary<string, string>? SetRequestHeader(string languageId)
 {
 	return new Dictionary<string, string>
 	{
-		{ "apiKey", "Gateway.ApiKey.2021" },
 		{ "languageId", languageId },
-		{ "corporateId", "TEST" },
-		{ "UserId", "853" }
+		{ "corporateId", "TEST" }
 	};
 }
