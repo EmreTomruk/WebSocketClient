@@ -25,4 +25,16 @@ namespace WebSocketClient
         public string Html { get; set; }
         public FileContentResult File { get; set; }
     }
+
+    public sealed class SaveDocumentsApiResponse
+    {
+        public List<DocumentApiResponse> Documents { get; set; }
+    }
+
+    public sealed class DocumentApiResponse
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public bool Result { get; set; }
+    }
 }

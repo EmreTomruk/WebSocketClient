@@ -70,5 +70,10 @@ namespace WebSocketClient
 		{
 			return await ExecuteAsJsonAsync<T>(HttpMethod.Get, null, apiMethod, apiUrl, false, headers);
 		}
+
+        public static async Task<T> PostAsJsonAsync<T>(object model, string apiMethod, string apiUrl, Dictionary<string, string> headers = null) where T : class, new()
+        {
+            return await ExecuteAsJsonAsync<T>(HttpMethod.Post, model, apiMethod, apiUrl, false, headers);
+        }
     }
 }
